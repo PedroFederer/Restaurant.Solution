@@ -1,0 +1,29 @@
+﻿body {
+    background-color: #000;
+    color: #fff;
+}
+
+.mealDropDown {
+    width: 100%;
+}
+
+.price, .qty {
+    width: 100%;
+    background-color: #000;
+    color: #fff;
+}
+
+.btn-save {
+    background: linear-gradient(#e99e61, #6B4423);
+    color: #fff;
+}
+
+.btn-back {
+    background: linear-gradient(#6B4423,#e99e61);
+    color: #fff;
+}
+
+    .btn-save:hover, .btn-back:hover {
+        font-weight: 900;
+        box-shadow: 0.5px 3px 3px #6B4423;
+    }

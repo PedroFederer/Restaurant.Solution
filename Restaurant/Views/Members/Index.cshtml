@@ -1,0 +1,44 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="zh-tw">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>會員中心</title>
+    <link rel="stylesheet" href="~/Content/MemberCenter.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght400;700display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <div class="navbar">
+            <a href="/Home/Index/"><img src="~/MyRestaurantImg/LOGO.png" class="logo" /></a>
+        </div>
+        <div class="row">
+            <div class="col">
+                <h1>會員中心</h1>
+            </div>
+            <div class="col">
+                <div class="card card1">
+                    <a href="@Url.Action("Logout","Members")">登出會員</a>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card card2">
+                    <a href="@Url.Action("EditProfile","Members")">維護會員資料</a>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card card3">
+                    <a href="@Url.Action("Cart","Cart")">查詢訂單</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</body>
+</html>
+

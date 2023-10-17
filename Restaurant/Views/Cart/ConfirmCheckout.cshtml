@@ -1,0 +1,151 @@
+﻿@model Restaurant.Models.ViewModels.OrderVm
+@using System.Globalization
+@{
+    ViewBag.Title = "ConfirmCheckout";
+    var i = 1;
+}
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+@Styles.Render("~/Content/css")
+@Styles.Render("~/Content/ConfirmCheckout.css")
+@Styles.Render("https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css")
+
+<div class="container">
+    <div class="row">
+        <div class="alert alert-warning resSuccess col-12" role="alert">
+            @if (ViewBag.haveRes != null)
+            {
+                <h2>您已經有預約了，祝您有個愉快的用餐</h2>
+            }
+            else
+            {
+                <h2>預約成功</h2>
+            }
+
+            <h3>
+                預約時間 @{var culture = new CultureInfo("zh-TW");
+                    var formattedDate = Model.ReservationTime.ToString("yyyy年MM月dd日") + " (" + culture.DateTimeFormat.GetDayName(((DateTime)Model.ReservationTime).DayOfWeek) + ")" + Model.ReservationTime.Hour.ToString("00") + ":00 -" + Model.ReservationTime.AddHours(2).Hour.ToString("00") + ":00"; }
+                @Html.Raw(formattedDate)
+            </h3>
+            <h3>預約人數 @Model.Diners</h3>
+
+        </div>
+
+        <table class="table col-12">
+            <tr>
+                <th>
+                    訂單明細
+                </th>
+                <th>
+                </th>
+            </tr>
+
+            @foreach (var item in Model.OrderItems)
+            {
+                <tr>
+                    <td>
+                        @{var isMain = false; }
+                        @foreach (var meal in ViewBag.mainMeal)
+                        {
+
+                            if (item.OrderItemDetails.FirstOrDefault().MealName == meal.Name)
+                            {
+                                isMain = true;
+                            }
+                        }
+                        @if (isMain == true)
+                        {
+                            <h4>第 @i 份套餐</h4>
+                        }
+                        else
+                        {
+                            <h4>加點</h4>
+                        }
+
+                    </td>
+                    <td class="text-end">小計</td>
+                    <td>@item.OrderItemDetails.Sum(o => o.MealPrice * o.Qty)</td>
+                </tr>
+
+                foreach (var detail in item.OrderItemDetails)
+                {
+                    <tr class="Asit">
+                        <td>
+                            @Html.DisplayFor(modelItem => detail.MealName)
+                        </td>
+                        <td>
+                            NT @Html.DisplayFor(modelItem => detail.MealPrice)
+                        </td>
+                        <td>
+                            @if (isMain == false)
+                            {
+                                <p style="display:inline-block">數量</p>
+                                @Html.DisplayFor(modelItem => detail.Qty)
+                            }
+                        </td>
+                    </tr>
+                }
+                i++;
+
+            }
+
+        </table>
+        <div class="col-9 text-end">總計:</div>
+
+        <div class="total col-2 text-end">NT @Model.TotalPrice</div>
+        <div class="col-3"></div>
+        <button class=" btn btncancel col-6">訂單取消</button>
+        <div class="col-3"></div>
+
+    </div>
+</div>
+@section scripts{
+    <script>
+        $(function () {
+            const swalWithBootstrapButtons = Swal.mixin({
+                customClass: {
+                    confirmButton: 'btn btn-success',
+                    cancelButton: 'btn btn-danger'
+                },
+                buttonsStyling: false
+            });
+
+            // 監聽 ".btncancel" 按鈕的點擊事件
+            $(".btncancel").click(function () {
+                // 顯示確認對話框
+                swalWithBootstrapButtons.fire({
+                    title: '確定要取消訂單嗎？',
+                    text: '預約時間前24小時取消訂單將不會退還訂金',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: '是的我要',
+                    cancelButtonText: '不，請取消',
+                    reverseButtons: true
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // 用戶確認取消訂單
+                        $.ajax({
+                            url: '/Cart/CancelOrder',
+                            type: 'GET',
+                            success: function (data) {
+                                // 請求成功
+                                Swal.fire("訂單已成功取消").then((result) => { window.location.href = "/Home/Index"; }
+
+                                )
+                            },
+                            error: function () {
+                                // 請求失敗
+                                Swal.fire("取消訂單時發生錯誤");
+                            }
+                        });
+                    } 
+                });
+            });
+        });
+
+    </script>
+
+
+
+
+
+}

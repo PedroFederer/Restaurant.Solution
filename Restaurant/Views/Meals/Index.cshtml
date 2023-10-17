@@ -1,0 +1,194 @@
+﻿@model IEnumerable<Restaurant.Models.ViewModels.MealIndexVm>
+
+@{
+    ViewBag.Title = "MENU";
+}
+
+
+<h2>MENU</h2>
+
+<!--分類按鈕 begin-->
+<div class="category_button">
+    <button type="button" class="btn btn-light " onclick="slickGoTo(0)">主菜</button>
+    <button type="button" class="btn btn-light" onclick="slickGoTo(1)">開胃菜</button>
+    <button type="button" class="btn btn-light" onclick="slickGoTo(2)">配菜</button>
+    <button type="button" class="btn btn-light" onclick="slickGoTo(3)">甜點</button>
+    <button type="button" class="btn btn-light" onclick="slickGoTo(4)">飲料</button>
+    <button type="button" class="btn btn-light" onclick="slickGoTo(5)">酒精</button>
+    <!-- 分類按鈕 end -->
+</div>
+<!--分類按鈕 end-->
+<!--輪播內容 begin-->
+<div class="container-fluid ">
+    <div class="row justify-content-center align-items-center">
+        <div class="col-xl-4 col-lg-6 col-md-8 col-sm-10 meals">
+        </div>
+    </div>
+</div>
+<!--輪播內容 end-->
+@section css{
+
+    <link rel="stylesheet" type="text/css" href="~/Content/slick.css" />
+    <link rel="stylesheet" type="text/css" href="~/Content/slick-theme.css" />
+    <link rel="stylesheet" href="~/Content/stylesindex.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+}
+
+@section scripts{
+
+    <script src="/Scripts/slick.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+
+
+        document.addEventListener("DOMContentLoaded", function () {
+            const container = document.querySelector(".meals");
+
+            // 使用 fetch() 呼叫 API
+            // console.info('data', JSON.stringify(data));
+            fetch('/Api/MealsApi/', {
+                method: 'GET',
+                /*body: JSON.stringify(data), // body data type must match "Content-Type" header*/
+                headers: new Headers({
+                    'Content-Type': 'application/json'
+                })
+            }).then(function (response) {
+                return response.json();
+            }).then(function (data) {
+                // 從API獲得的資料
+                console.log("API response:", data);
+                if (Array.isArray(data)) {
+                    for (var i = 0; i < data.length; i++) {
+                        let meal = data[i];
+                        console.log('meal=', meal);
+
+                        let name1 = meal.name1;
+                        let img1 = meal.mealsImage1;
+                        let price1 = meal.price1;
+                        let description1 = meal.description1;
+                        let categoryName1 = meal.categoryName1;
+                        let name2 = meal.name2;
+                        let img2 = meal.mealsImage2;
+                        let price2 = meal.price2;
+                        let description2 = meal.description2;
+                        let categoryName2 = meal.categoryName2;
+
+                        // 建立輪播卡片的元素
+                        const card = document.createElement("div");
+                        card.className = "meals__container";
+
+                        //分類
+                        const customBg = document.createElement("h1");
+                        customBg.className = "meals__category";
+                        customBg.index = 1;
+                        customBg.innerText = `${categoryName1}`;
+
+                        const row1 = document.createElement("div");
+                        row1.className = "meals__item col-12";
+
+                        //圖片1
+                        const col1 = document.createElement("div");
+                        col1.className = "col-6";
+                        const imgFileName = img1;
+                        const imgPath = `/MyRestaurantImg/${imgFileName}`;
+                        const imgElement = document.createElement("img");
+                        imgElement.src = imgPath;
+                        imgElement.className = "card-img-top";
+                        imgElement.alt = "...";
+                        imgElement.align = "left";
+                        imgElement.name = description1;
+
+                        col1.appendChild(imgElement);
+
+                        //名稱價格1
+                        const col2 = document.createElement("div");
+                        col2.className = "card-text"; // 合併這行的類別
+                        col2.innerHTML = `${name1}</br>$${price1}`;
+
+                        row1.appendChild(col1);
+                        row1.appendChild(col2);
+
+                        const row2 = document.createElement("div");
+                        row2.className = "meals__item";
+
+                        //圖片2
+                        const col3 = document.createElement("div");
+                        col3.className = "col-6";
+                        const imgFileName2 = img2;
+                        const imgPath2 = `/MyRestaurantImg/${imgFileName2}`;
+                        const imgElement2 = document.createElement("img");
+                        imgElement2.src = imgPath2;
+                        imgElement2.className = "card-img-top";
+                        imgElement2.alt = "...";
+                        imgElement2.align = "left";
+                        imgElement2.name = description2;
+
+                        col3.appendChild(imgElement2);
+
+                        //名稱價格2
+                        const col4 = document.createElement("div");
+                        col4.className = "card-text"; // 合併這行的類別
+                        col4.innerHTML = `${name2}</br>$${price2}`;
+
+                        row2.appendChild(col3);
+                        row2.appendChild(col4);
+
+                        card.appendChild(customBg);
+                        card.appendChild(row1);
+                        card.appendChild(row2);
+
+                        container.appendChild(card);
+
+                    }
+                    //輪播
+                    $('.meals').slick({
+                        dots: true,
+                        speed: 300,
+                        arrows: true,
+                        focusOnSelect: true
+
+                    });
+                    //sweetAlert畫面
+                    function showAlert(imgSrc, description) {
+                        Swal.fire({
+                            title: description,
+                            titleColor: '#FC6 !important',
+                            width: 600,
+                            imageUrl: imgSrc,
+                            confirmButtonText: '關閉',
+                            confirmButtonColor: '#544639',
+                            padding: '3em',
+                            color: '#716add',
+                            background: '#fff url(/images/trees.png)',
+                            backdrop: `
+                                    rgba(0,0,123,0.4)
+                                    url("/img/nyan-cat-nyan.gif")
+                                    left top
+                                    no-repeat
+                                  `
+                        });
+                    }
+
+                    //sweetAlert畫面，當點擊時alert出來的圖片就是點的那張圖片。
+                    $('.card-img-top').click(function () {
+                        var imgSrc = $(this).attr('src');
+                        showAlert(imgSrc, $(this).attr('name'));
+                    });
+                }
+
+            }).catch(function (error) {
+                // 處理錯誤
+                console.error('Request failed', error);
+            });
+        });
+
+        //分類按鈕
+        function slickGoTo(key) {
+            $('.meals').slick('slickGoTo', key);
+            var index = $(this).index();
+            slickGoTo(index);
+        }
+
+    </script>
+
+}

@@ -1,0 +1,607 @@
+﻿* {
+    font-family: Noto Sans TC Thin, Work Sans;
+}
+/*#6B4423*/
+body {
+    /*background: linear-gradient(#e99e61, #6B4423);*/
+    background-color: #6B4423;
+}
+
+.black {
+    margin: 5% auto !important;
+    background-color: #000;
+    border-radius: 10px;
+    max-width: 2000px;
+}
+
+.title {
+    margin-top: 45px;
+    margin-bottom: 15px;
+}
+
+.line {
+    background-color: #6B4423;
+    height: 15px;
+    width: 100%;
+}
+
+
+.form-control {
+    width: 100%;
+    background-color: #dde;
+    border: solid 5px #999;
+    height: 60px !important;
+    font-size: 1.5em;
+}
+
+.form-floating label {
+    /* 标签的样式 */
+    color: #555;
+    margin-left: 15px;
+}
+
+label::after {
+    background-color: #dde !important;
+    /* 其他样式属性 */
+}
+
+
+
+.seletCard, .seletCardLi a {
+    width: 100%;
+}
+
+#tabs {
+    background-color: #222 !important;
+    border: none;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 60px;
+}
+
+.selectCardUl {
+    background-color: #000 !important;
+    border: none !important;
+    border-bottom: solid 1px #fff !important;
+}
+
+.selectCardLi {
+    width: 22%;
+    background-color: #222 !important;
+    font-size: 1.3em;
+}
+
+    .selectCardLi a {
+        width: 100%;
+        text-align: center;
+    }
+
+.selectCardP {
+    border-left: solid 1px #fff !important;
+    border-right: solid 1px #fff !important;
+    border-bottom: solid 1px #fff !important;
+    color: #fff !important;
+    overflow: auto;
+}
+
+.mealImg {
+    height: 150px;
+    width: 200px;
+    object-fit: cover;
+}
+
+.meal {
+    border: solid 6px #191919;
+    margin: 10px;
+    padding: 10px;
+    box-shadow: 2px 5px #111111;
+    background-color: #292929;
+    border-radius: 5px;
+    max-width: 230px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+}
+
+.mealSec {
+    border: solid 6px #191919;
+    margin: 10px;
+    padding: 10px;
+    box-shadow: 2px 5px #111111;
+    background-color: #292929;
+    border-radius: 5px;
+    max-width: 230px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.mealName {
+    width: 200px;
+    color: #fff;
+    background-color: #6B4423;
+    height: 80px;
+    margin-top: 3px;
+    padding-top: 0px !important;
+    border: solid 3px #000;
+}
+
+    .mealName p {
+        font-size: 1.3em;
+        font-weight: 900;
+        width: 150px;
+        margin: 0 auto;
+        margin-bottom: -0px;
+    }
+
+.mealPrice {
+    top: 3px;
+    background-color: #fff;
+    color: #000;
+    width: 200px;
+    border: solid 3px #000;
+    height: 30px;
+    padding: 0;
+}
+
+    .mealPrice p {
+        font-size: 18px;
+        text-align: center;
+    }
+
+.meal li {
+    list-style-type: none;
+}
+
+.meal input {
+    display: none;
+}
+
+.qtyUse {
+    display: flex;
+    height: 50px;
+    padding: 0;
+}
+
+    .qtyUse li {
+        list-style: none;
+    }
+
+.num {
+    background-color: #fff;
+    width: 30px;
+    color: #000;
+}
+
+    .num p {
+        text-align: center;
+        font-size: 1.3em;
+        margin-top: 12px;
+    }
+
+.incre, .decre {
+    height: 50px;
+    width: 85px;
+    font-size: 1.3em;
+}
+
+.addInCart {
+    width: 120px;
+}
+
+.mealList {
+    padding-left: 0px;
+    margin-top: 10px;
+}
+
+.itemTotalPrice::before {
+    content: "小計NT ";
+}
+
+.mealPrice p::before {
+    content: "NT ";
+}
+
+.totalPrice::before {
+    content: "NT ";
+}
+
+.mealSelectedTitle {
+    background-color: #222;
+    padding-top: 20px;
+    border-top: solid 1px #fff;
+    border-left: solid 1px #fff;
+    border-right: solid 1px #fff;
+    border-radius: 5px 5px 0px 0px;
+}
+
+.mealSelected {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+    .mealSelected h2 {
+        font-size: 1em;
+    }
+
+.mealSelectedContent {
+    background-color: #222;
+    height: 250px;
+    overflow: auto;
+    border-left: solid 1px #fff;
+    border-right: solid 1px #fff;
+    border-bottom: solid 1px #fff;
+    border-radius: 0 0 5px 5px;
+    padding: 20px;
+    margin-bottom: 45px;
+}
+
+.mealWhiteLine {
+    height: 1px;
+    background-color: #fff;
+    margin-top: 63px;
+}
+
+.finishOrder {
+    height: 45px;
+    background: linear-gradient(#e99e61, #6B4423);
+    color: #fff;
+    margin-bottom: 60px;
+    border-radius: 10px;
+    border: solid 2px #fff;
+}
+
+.mealBlock {
+    flex-wrap: nowrap;
+    width: 1000px !important;
+}
+
+.orderItemed {
+    background-color: #555;
+    box-shadow: 1px 1px #000;
+    border-radius: 5px;
+    border-bottom: 3px solid #666;
+    border-right: 3px solid #666;
+    padding: 5px;
+    color: #fff;
+    flex-wrap: wrap;
+}
+
+
+.editOrderItem, .editOrderItemIncre {
+    padding: 2px 15px !important;
+}
+
+.orderItemedUl {
+    list-style: none;
+}
+
+.mainMeal {
+    margin-left: 20px;
+    padding: 10px;
+    border: solid 2px #bbb;
+    width: 45%;
+}
+
+.editOrderItem, .editOrderItemIncre {
+    background: linear-gradient(#e99e61, #6B4423) !important;
+}
+
+.deleteOrderItem {
+    background: linear-gradient(#6B4423,#e99e61 ) !important;
+}
+
+.editOrderItem, .deleteOrderItem, .editOrderItemIncre {
+    color: #fff;
+    margin: 5px;
+    height: 60px;
+    font-size: 15px;
+    text-align: center;
+}
+
+.orderItemedUl .mealList p {
+    font-size: 20px;
+    border: none;
+    color: #000;
+}
+
+.orderItemedUl .mealList .btn {
+    background-color: #dde;
+}
+
+.orderItemedUl .mealList .num {
+    font-size: 20px;
+}
+
+.deletItem {
+    border: 1px solid #fff;
+    height: 27px;
+    margin-top: -3px;
+    width: 27px;
+    text-align: center;
+    background-color: #dde;
+    padding: 0 !important;
+}
+
+    .deletItem p {
+        margin-top: -3px !important;
+        padding: 0 !important;
+        font-size: 20px;
+    }
+
+.warn {
+    color: #ee6f6f;
+}
+
+
+
+
+.accordion-body {
+    overflow: auto;
+}
+
+.accordion-item {
+    width: 90%;
+    margin: 0 auto;
+}
+
+.accordion-item, .accordion-button {
+    background-color: #222 !important;
+    color: #fff;
+}
+
+.accordion-button {
+    width: 50% !important;
+    display: inline-block !important;
+    text-align: center;
+}
+
+.accordion-header {
+    text-align: center;
+    padding-top: 5px;
+}
+
+.accordion-title {
+    height: 60px !important;
+    background: linear-gradient(#e99e61, #6B4423);
+    padding-top: 8px
+}
+
+.btn-Block {
+    font-size: 0;
+}
+
+    .btn-Block p {
+        display: inline;
+        color: red;
+        margin-left: 50px;
+        font-size: 20px;
+    }
+
+.numOfPeople {
+    background-color: #000;
+    color: #fff;
+}
+
+.btnSelectRes {
+    background: linear-gradient(#e99e61, #6B4423);
+    width: 100px;
+    height: 40px;
+}
+
+.space {
+    height: 15px;
+}
+
+.blockSelectRes {
+    width: 400px;
+    height: 400px;
+    position: absolute;
+    border: solid 1px #e99e61;
+    top: 600px;
+    right: 15%;
+    background-color: #333;
+    display: none;
+}
+
+.rdo {
+    display: none;
+}
+
+.btnRadio {
+    background: linear-gradient(#fff, #eee);
+    color: #000;
+    padding: 3px;
+    height: 35px;
+    border-radius: 2px;
+    border-bottom: 5px solid #ddd;
+    font-weight: 900;
+    cursor: pointer;
+}
+
+    .btnRadio:hover {
+        background: linear-gradient(#e99e61, #e99e61);
+    }
+
+.timeSave {
+    background: linear-gradient(#e99e61, #6B4423);
+    border-radius: 2px;
+    color: #fff;
+}
+
+.cantRes2, .cantRes4 {
+    display: none;
+}
+
+.secOrderTitle {
+    color: yellow;
+    height: 50px;
+    padding: 5px;
+}
+
+    .secOrderTitle p {
+        font-size: 30px;
+    }
+
+.submitTotal::before {
+    content: "NT";
+    color: #fff;
+}
+
+.addInCart {
+    border-radius: 10px;
+    font-size: 25px;
+    cursor: pointer;
+}
+
+    .addInCart:hover {
+        background-color: #e99e61;
+    }
+
+    .addInCart:active {
+        background-color: #6B4423;
+        color: #fff;
+    }
+
+@media (max-width: 770px) {
+    .mealWhiteLine {
+        display: none;
+    }
+
+    .titlepeople {
+        font-size: 20px;
+    }
+
+    .unit {
+        font-size: 20px;
+    }
+
+    .titletime {
+        font-size: 20px;
+    }
+
+    .timeblock {
+        font-size: 20px;
+    }
+
+    .btnSelectRes {
+        height: 30px;
+        padding: 0px;
+    }
+}
+
+
+@media (max-width: 540px) {
+    .timeblock {
+        width: 50%
+    }
+
+    .btnSelectRes {
+        margin: 0 auto;
+    }
+
+    .blockSelectRes {
+        left: 20px;
+    }
+
+    .btn-Block p {
+        margin-left: 15px !important;
+    }
+
+    .timeblock {
+        width: 65%;
+    }
+}
+
+@media (max-width: 500px) {
+    .orderItemed {
+        margin: 5px 5px !important;
+    }
+
+        .orderItemed h5 {
+            font-size: 0.8em;
+            margin: 0;
+        }
+
+        .orderItemed p {
+            font-size: 0.6em;
+            margin: 0;
+        }
+
+    .orderItemedUl {
+        margin: 5px 5px;
+        padding-left: 3px !important;
+        height: 40px;
+        align-items: center !important;
+    }
+
+    .mealList {
+        height: 40px !important;
+    }
+
+    .buttonIncre, .buttonDescre, .num, .deletItem {
+        padding: 0px 10px !important;
+        margin: 0 !important;
+    }
+
+        .buttonIncre p, .buttonDescre p {
+            margin: 0 !important;
+        }
+
+    .num {
+        font-size: 0.8em !important;
+        padding: 10px 0px !important;
+    }
+
+    .deletItem {
+        height: 38px;
+        padding: 5px 5px !important;
+        width: 50px;
+        margin-top: -3px !important;
+    }
+
+        .deletItem p {
+            margin: 0 !important;
+            height: 38px;
+            font-size: 15px;
+        }
+
+    .buttonIncre p, .buttonDescre p {
+    }
+
+    .mealSelectedContent {
+        padding: 5px;
+    }
+}
+
+@media (max-width: 490px) {
+    .num p {
+        margin: 0;
+    }
+
+    .titlepeople, .unit, .titletime {
+        font-size: 16px;
+    }
+    .btn-Block p {
+        font-weight:900;
+    }
+}
+
+@media (max-width: 400px) {
+
+    .titlepeople, .titletime {
+        width: 100px !important;
+    }
+
+    .unit {
+        width: 30px !important;
+        margin-right: 5px !important;
+    }
+
+    .timeblock {
+        width: 200px;
+    }
+}

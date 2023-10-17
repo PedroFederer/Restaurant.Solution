@@ -1,0 +1,281 @@
+﻿
+@{
+    ViewBag.Title = "Reservation";
+}
+
+@using System.Globalization
+
+@Styles.Render("~/Content/css")
+@Styles.Render("~/Content/Reservation.css")
+@{
+    var cantResDition = ViewBag.cantRes as Dictionary<int, List<int>>;
+    var cantRes2 = cantResDition[2] as List<int>;
+    var cantRes4 = cantResDition[4] as List<int>;
+}
+
+
+<div class="container-fluid photo">
+    <nav aria-label="breadcrumb" class="sectop">
+        <ol class="breadcrumb">
+
+            <li class="breadcrumb-item active " aria-current="page"><a class="home" href="/Home">Home</a></li>
+
+            <li class="breadcrumb-item active " aria-current="page">預約</li>
+        </ol>
+
+    </nav>
+    <div class="container-fluid">
+        @foreach (var item in cantRes2)
+        {
+            <div class="text-white cantRes2">
+                @item
+            </div>
+        }
+        @foreach (var item in cantRes4)
+        {
+            <div class="text-white cantRes4">
+                @item
+            </div>
+        }
+        <div class="row">
+            <div class="col-md-1 col-lg-3"></div>
+            <div class="col-md-10 black col-lg-6">
+                <div class="row title">
+                    <div class="col-md-5">
+                        <h2 class="text-white text-center">預約事項</h2>
+                        <p class="text-white">
+                            ● 如已預約並未成成訂單不能再次預約
+                            <br>
+                            ● 本餐廳為小家庭是餐廳，僅允許1-4人進行線上預約訂位，人數如果超過可撥打餐廳電話預訂
+                            <br>
+                            ● 本餐廳低銷為每人一份套餐，套餐內容包含主菜、開胃菜、甜點 與飲品
+                            <br>
+                            ● 午餐時段用餐時間為2小時，晚餐時段則為3小時
+                            <br>
+                            ● 最後，祝您有個愉快的用餐時間
+                        </p>
+                    </div>
+                    <div class="col-md-7 d-flex justify-content-center row">
+                        <img src="https://images.pexels.com/photos/2961968/pexels-photo-2961968.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                             alt="" class="reservationCase mt-4 mb-4">
+                    </div>
+                </div>
+                <form action="" class="row">
+                    <h3 class="text-white reservationData">
+                        預約人數
+                    </h3>
+                    <hr>
+                    <select name="numOfPeople" id="numOfPeople" class="numOfPeople">
+                        <option value="0" selected>請選擇</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                    </select>
+
+
+                    <p class="Ps text-white mt-2">人數:</p>
+                    <h3 class="reservationTime text-white">
+                        預約時間
+                    </h3>
+                    <hr>
+                    <div class="row d-flex justify-content-center">
+                        <h4 class="text-white col-12 mt-3 mb-3 date">
+                            @if (ViewBag.datetomorrow != null)
+                            {
+                                var culture = new CultureInfo("zh-TW");
+                                var formattedDate = ViewBag.datetomorrow.ToString("yyyy年MM月dd日") + " (" + culture.DateTimeFormat.GetDayName(((DateTime)ViewBag.datetomorrow).DayOfWeek) + ")";
+                                @Html.Raw(formattedDate)
+                            }
+                        </h4>
+                        <div class="col-4 ">
+                            <input type="radio" name="time" id="day1" class="rdo" value="1">
+                            <label for="day1" class="btnRadio canRes">
+                            </label>
+                            <div class="text-white text-center">11:00-13:00</div>
+                        </div>
+                        <div class="col-4">
+                            <input type="radio" name="time" id="day2" class="rdo" value="2">
+                            <label for="day2" class="btnRadio canRes"></label>
+                            <div class="text-white text-center">13:00-15:00</div>
+                        </div>
+                        <div class="col-4">
+                            <input type="radio" name="time" id="day3" class="rdo" value="3">
+                            <label for="day3" class="btnRadio canRes"></label>
+                            <div class="text-white text-center">18:00-20:00</div>
+                        </div>
+                        <h4 class="text-white col-12 mt-3 mb-3 date">
+                            @if (ViewBag.datetomorrow != null)
+                            {
+                                var culture = new CultureInfo("zh-TW");
+                                var formattedDate = ViewBag.dateTheDayAfterTomorrow.ToString("yyyy年MM月dd日") + " (" + culture.DateTimeFormat.GetDayName(((DateTime)ViewBag.dateTheDayAfterTomorrow).DayOfWeek) + ")";
+                                @Html.Raw(formattedDate)
+                            }
+                        </h4>
+                        <div class="col-4">
+                            <input type="radio" name="time" id="day4" class="rdo" value="4">
+                            <label for="day4" class="btnRadio canRes"></label>
+                            <div class="text-white text-center">11:00-13:00</div>
+                        </div>
+                        <div class="col-4">
+                            <input type="radio" name="time" id="day5" class="rdo" value="5">
+                            <label for="day5" class="btnRadio canRes"></label>
+                            <div class="text-white text-center">13:00-15:00</div>
+                        </div>
+                        <div class="col-4">
+                            <input type="radio" name="time" id="day6" class="rdo" value="6">
+                            <label for="day6" class="btnRadio canRes"></label>
+                            <div class="text-white text-center">18:00-20:00</div>
+                        </div>
+                        <h4 class="text-white col-12 mt-3 mb-3 date">
+                            @if (ViewBag.datetomorrow != null)
+                            {
+                                var culture = new CultureInfo("zh-TW");
+                                var formattedDate = ViewBag.dateAfterThreeDays.ToString("yyyy年MM月dd日") + " (" + culture.DateTimeFormat.GetDayName(((DateTime)ViewBag.dateAfterThreeDays).DayOfWeek) + ")";
+                                @Html.Raw(formattedDate)
+                            }
+                        </h4>
+                        <div class="col-4">
+                            <input type="radio" name="time" id="day7" class="rdo" value="7">
+                            <label for="day7" class="btnRadio canRes"></label>
+                            <div class="text-white text-center">11:00-13:00</div>
+                        </div>
+                        <div class="col-4">
+                            <input type="radio" name="time" id="day8" class="rdo" value="8">
+                            <label for="day8" class="btnRadio canRes"></label>
+                            <div class="text-white text-center">13:00-15:00</div>
+                        </div>
+                        <div class="col-4">
+                            <input type="radio" name="time" id="day9" class="rdo" value="9">
+                            <label for="day9" class="btnRadio canRes"></label>
+                            <div class="text-white text-center">18:00-20:00</div>
+                        </div>
+                    </div>
+
+
+
+                </form>
+
+                <div class="row">
+                    <button class="goToCart btn">
+                        去點餐
+                    </button>
+                    <div class="col-1"></div>
+                    <h2 class="text-white  col-10">探究真實的光輝</h2>
+                    <div class="col-12 d-flex  justify-content-center">
+                        <img src="https://images.pexels.com/photos/5490933/pexels-photo-5490933.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+                             alt="" class="photoEnd">
+                    </div>
+                    <div class="col-2"></div>
+                    <div class="col-8">
+                        <p class="text-white pEnd">
+
+                            在我們的餐廳，我們不僅僅關注美味的食物，更專注於探索城市的真實光彩。我們提供的不僅僅是菜單上的美味，更是一場專注城市主題的精緻體驗。來到這裡，您將發現城市的獨特魅力，品味繁華與創新的結合。
+                        </p>
+                    </div>
+                    <div class="col-12 whiteLine"></div>
+                </div>
+
+            </div>
+
+            <div class="col-md-1 col-lg-3"></div>
+        </div>
+    </div>
+</div>
+@section scripts{
+    <script src="js/jquery.js"></script>
+    <script>
+        $(function () {
+            $(".rdo").change(function () {
+                if ($(this).is(":checked")) {
+                    // 如果被选中，改变样式
+                    $(this).next(".btnRadio").css("background-color", "#6B4423");
+                } else {
+                    // 如果未被选中，还原样式
+                    $(this).next(".btnRadio").css("background-color", "");
+                }
+
+                // 还原其他 radio 按钮的样式
+                $(".rdo").not(this).each(function () {
+                    if (!$(this).prop("disabled")) {
+                        $(this).next(".btnRadio").css("background-color", "");
+                    }
+                });
+                var numOfPeople = 1;
+
+            });
+
+            let cantResArr = [];
+            $("#numOfPeople").change(function () {
+                var selectedValue = $(this).val();
+
+                // 移除所有选项的选中状态
+                $('#numOfPeople option').removeAttr('selected');
+
+                // 设置所选值为选中
+                $('#numOfPeople option[value="' + selectedValue + '"]').attr('selected', 'selected');
+                numOfPeople = parseInt($(".numOfPeople").find("option:selected").val());
+                $(".Ps").text("人數: " + numOfPeople + "位");
+                let people = $(".numOfPeople").find("option:selected").val();
+
+                if (people <= 2) {
+                    cantResArr = [];
+                    $(".cantRes2").each(function () {
+                        cantResArr.push(parseInt($(this).text()));
+                    })
+                }
+                else {
+                    cantResArr = [];
+                    $(".cantRes4").each(function () {
+                        cantResArr.push(parseInt($(this).text()));
+                    })
+                }
+                console.log(cantResArr[0]);
+                $("label").css("background-color", "");
+                $("label").css("color", "");
+                $("label").removeClass("full");
+                $("label").addClass("canRes");
+                $(`.rdo`).prop("disabled", false);
+                for (var num of cantResArr) {
+
+
+                    var labelElement = $(`label[for='day${num}']`);
+                    labelElement.css("background-color", "#fff");
+                    labelElement.css("color", "#000");
+                    labelElement.addClass("full");
+                    labelElement.removeClass("canRes");
+                    $(`#day${num}`).prop("disabled", true);
+
+                }
+
+            });
+
+
+            $(".goToCart").click(function () {
+
+                var people = $(".numOfPeople").find("option:selected").val();
+                var reservationVul = $("input[name='time']:checked").val();
+                if (people <= 0) {
+                    alert("請選擇人數");
+                }
+                else if (reservationVul == undefined) {
+                    alert("請選擇預約時間");
+                }
+                else {
+                    window.location.href = "/Cart/Cart?people=" + people + "&reservationVul=" + reservationVul;
+                }
+
+            });
+
+
+
+
+
+
+
+        });
+    </script>
+
+
+
+}

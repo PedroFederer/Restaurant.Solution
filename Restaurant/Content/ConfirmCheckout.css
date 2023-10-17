@@ -1,0 +1,26 @@
+﻿body {
+    background-color: #6B4423;
+}
+
+.container {
+    background-color: #000;
+    color: #fff;
+    padding-top: 30px;
+}
+
+.table {
+    color: #fff;
+}
+
+.btncancel {
+    background-color: #fff;
+}
+
+.Asit {
+    background: linear-gradient(rgba(233, 158, 97, 0.6), rgba(107, 68, 35, 0.6));
+    color: #fff !important;
+}
+
+    .Asit td {
+        opacity: 1;
+    }

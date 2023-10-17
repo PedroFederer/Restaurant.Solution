@@ -1,0 +1,88 @@
+﻿
+* {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-family: 'Work Sans', 'Noto Sans TC';
+}
+
+h2 {
+    color: #FFFFFF;
+    font-size: 5em;
+    font-weight: 600;
+    margin-top: 60px;
+    margin-right: 5px
+}
+
+body {
+    margin: 80px auto;
+    background-image: url("/img/carlos-aranda-IYMceGutrbQ-unsplash.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    background-color: rgba(255, 255, 255, 0.014);
+}
+
+.meals {
+    /*border:1px solid red;*/
+    height: 600px;
+}
+
+.meals__container {
+    width: 100%;
+    height: 600px;
+    padding: 10px;
+    background-color: #544639;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.meals__category {
+    color: #FFFFFF;
+    font-size: 2.5em;
+    text-align: center;
+}
+
+.meals__item {
+    width: 100%;
+    height: 240px;
+    margin-bottom: 25px;
+    border-radius: 5px;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+}
+
+.card-text {
+    color: #FC6;
+    text-align: start;
+    font-size: 20px;
+    margin-left: 15px;
+}
+
+.card-img-top {
+    height: 200px;
+    object-fit: contain;
+    cursor: pointer;
+}
+
+.btn {
+    background-color: #544639;
+    outline-color: #FC6;
+    color: #FC6 !important;
+}
+
+.swal2-title {
+    color: #544639 !important;
+}
+
+.category_button {
+    text-align: center;
+    margin-top: -10px;
+}
+
+.container-fluid {
+    margin-top: 20px;
+}

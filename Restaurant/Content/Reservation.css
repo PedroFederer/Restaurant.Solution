@@ -1,0 +1,172 @@
+﻿body {
+    background-color: #000;
+}
+
+.reservationCase {
+    width: 380px;
+    height: 350px;
+    object-fit: cover;
+}
+
+.breadcrumb {
+    background-color: #6B4423;
+}
+
+.title {
+    margin-top: 60px;
+}
+
+.reservationData {
+    margin-top: 60px;
+}
+
+hr {
+    background-color: #fff;
+    color: #fff;
+    height: 3px;
+    width: 60%;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+option {
+    background-color: #222;
+    border: solid 1px #fff;
+    color: #fff;
+    font-size: 1.2em;
+}
+
+select {
+    margin-top: 20px !important;
+    width: 500px !important;
+    margin-left: 20px;
+    height: 35px;
+    font-size: 2em;
+    color: #fff;
+    background-color: #222;
+}
+
+.reservationTime {
+    margin-top: 60px;
+}
+
+.btnRadio {
+    background-color: #444444;
+    padding: 15px 60px;
+    border-radius: 15px;
+    color: #ffffff;
+    font-size: 1.2em;
+}
+
+    .btnRadio:hover {
+        background-color: #94633b;
+    }
+
+.rdo {
+    display: none;
+}
+
+.date {
+    margin-top: 50px !important;
+    margin-bottom: 20px !important;
+    margin-left: 100px !important;
+    font-size: 2em;
+}
+
+.submit {
+    width: 40%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 150px;
+    margin-bottom: 200px;
+    background-color: #6B4423;
+    font-size: 1.5em;
+    color: #fff;
+    text-align: center;
+    text-decoration: none;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    border-radius: 10px;
+    border: 1px solid #fff;
+}
+
+.photoEnd {
+    width: 94%;
+    object-fit: cover;
+}
+
+.pEnd {
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 50px;
+}
+
+.whiteLine {
+    width: 26%;
+    background-color: #fff;
+    height: 8px;
+    border-radius: 5px;
+    margin-right: auto;
+    margin-left: auto;
+    margin-bottom: 100px;
+}
+
+.goToCart {
+    color: #fff;
+    background: linear-gradient(#6B4423,#e99e61);
+    width: 250px;
+    margin: 30px auto;
+}
+
+.home {
+    color: #fff;
+    text-decoration: none;
+}
+
+.submit:hover {
+    background-color: #a16b3e;
+}
+
+footer {
+}
+
+.full::after {
+    content: "已滿";
+    color: red;
+}
+
+.canRes::after {
+    content: "可訂";
+    color: #fff;
+}
+
+option {
+    font-size: 15px;
+}
+
+.numOfPeople {
+    font-size: 15px;
+}
+
+.btnRadio {
+    width: 100%;
+    text-align: center;
+    font-size: 15px;
+    height: 60px;
+    padding: 0px;
+    padding-top: 20px;
+}
+
+.cantRes2, .cantRes4 {
+    display: none;
+}
+
+@media(max-width: 560px) {
+    .date {
+        font-size: 20px;
+    }
+
+    .numOfPeople {
+        width: 80% !important;
+    }
+}

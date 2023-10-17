@@ -1,0 +1,349 @@
+﻿@model Restaurant.Models.ViewModels.CartItemVm
+@using Restaurant.Models.EFModels;
+@Styles.Render("~/Content/css")
+@Styles.Render("~/Content/EditCartItem.css")
+@Styles.Render("~/Content/EditCartSecItem.css")
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>編輯加點</title>
+</head>
+<body>
+    <h2>編輯加點</h2>
+    <div class="container">
+        <div class="row">
+            <h5 class="col-md-3">配菜</h5>
+            <select class="col-md-3 sideSelec">
+                @foreach (var meal in ViewBag.CanSecOrders[1] as List<Meal>)
+                {
+                    <option value="@meal.Id" data-price="@meal.Price">@meal.Name</option>
+                }
+            </select>
+            <div class="col-md-1">價格</div>
+            <div class="sidePrice col-md-2">0</div>
+            <button class="btn sidebtn col-md-3">加入清單</button>
+            <div class="col-12 mb-2"></div>
+
+            <h5 class="col-md-3">飲料</h5>
+            <select class="col-md-3 drinkSelec">
+                @foreach (var meal in ViewBag.CanSecOrders[2] as List<Meal>)
+                {
+                    <option value="@meal.Id" data-price="@meal.Price">@meal.Name</option>
+                }
+            </select>
+            <div class="col-md-1">價格</div>
+            <div class="drinkPrice col-md-2">0</div>
+            <button class="btn drinkbtn col-md-3">加入清單</button>
+            <div class="col-12 mb-2"></div>
+
+            <h5 class="col-md-3">酒</h5>
+            <select class="col-md-3 wineSelec">
+                @foreach (var meal in ViewBag.CanSecOrders[3] as List<Meal>)
+                {
+                    <option value="@meal.Id" data-price="@meal.Price">@meal.Name</option>
+                }
+            </select>
+            <div class="col-md-1">價格</div>
+            <div class="winePrice col-md-2">0</div>
+            <button class="btn winebtn col-md-3">加入清單</button>
+        </div>
+    </div>
+
+
+    <table class="table">
+        <tr>
+            <th>
+                商品名稱
+            </th>
+            <th>
+                商品價格
+            </th>
+            <th>
+                數量
+            </th>
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
+        @foreach (var item in Model.CartItemDetails)
+        {
+            <tr class="@item.MealId">
+                <td class="mealname">
+                    @Html.DisplayFor(modelItem => item.MealName)
+                </td>
+                <td class="mealprice">
+                    @Html.DisplayFor(modelItem => item.MealPrice)
+                </td>
+                <td class="text-end">
+                    <button class="decre">-</button>
+                </td>
+                <td class="qty">
+                    @Html.DisplayFor(modelItem => item.Qty)
+                </td>
+                <td>
+                    <button class="incre">+</button>
+                </td>
+                <td>
+                    <button class="deleteDetail btn">刪除</button>
+                </td>
+            </tr>
+        }
+    </table>
+    <button class="postbtn btn">保存</button>
+    @Html.ActionLink("回到點餐頁面", "Cart", null, new { @class = "btn btn-back" })
+    <div class="people">@ViewBag.people</div>
+    <div class="reservationtime">@ViewBag.reservationtime</div>
+</body>
+</html>
+@section Scripts {
+    <script>
+        $(function () {
+            var wineSeleced = $(".wineSelec").find("option:selected");
+            var winePrice = wineSeleced.data("price");
+            $(".winePrice").text(winePrice);
+            $(".wineSelec").change(function () {
+                var wineSeleced = $(".wineSelec").find("option:selected");
+                var winePrice = wineSeleced.data("price");
+                $(".winePrice").text(winePrice);
+            })
+
+            var sideSeleced = $(".sideSelec").find("option:selected");
+            var sidePrice = sideSeleced.data("price");
+            $(".sidePrice").text(sidePrice);
+            $(".sideSelec").change(function () {
+                var sideSeleced = $(".sideSelec").find("option:selected");
+                var sidePrice = sideSeleced.data("price");
+                $(".sidePrice").text(sidePrice);
+            })
+
+
+            var drinkSeleced = $(".drinkSelec").find("option:selected");
+            var drinkPrice = drinkSeleced.data("price");
+            $(".drinkPrice").text(drinkPrice);
+            $(".drinkSelec").change(function () {
+                var drinkSeleced = $(".drinkSelec").find("option:selected");
+                var drinkPrice = drinkSeleced.data("price");
+                $(".drinkPrice").text(drinkPrice);
+            })
+
+            $(".sidebtn").click(function () {
+                let haveItem = false;
+                var sideSeleced = $(".sideSelec").find("option:selected").text();
+                var sideSelecedval = $(".sideSelec").find("option:selected").val();
+                var sidePrice = $(".sidePrice").text();
+                $(".mealname").each(function () {
+                    if ($(this).text().trim() == sideSeleced.trim()) {
+                        var oriqty = parseInt($(this).closest("tr").find(".qty").text());
+                        $(this).closest("tr").find(".qty").text((oriqty + 1).toString())
+                        haveItem = true;
+                    }
+                })
+                if (haveItem == false) {
+                    var sideHtml = `<tr class="${sideSelecedval}"><td class="mealname">${sideSeleced}</td><td class="mealprice">${sidePrice}</td><td  class="text-end">
+                    <button class="decre">-</button>
+                </td>
+                <td class="qty">
+                    1
+                </td>
+                <td>
+                    <button class="incre">+</button>
+                </td><td><button class="deleteDetail btn">刪除</button></td></tr>`;
+                    $("table").append(sideHtml);
+                }
+                $(".deleteDetail").off("click");
+
+                $(".deleteDetail").each(function () {
+                    $(this).click(function () {
+                        $(this).closest("tr").remove();
+                    })
+                })
+                $(".incre").off("click");
+                $(".decre").off("click");
+                $(".decre").each(function () {
+                    $(this).click(function () {
+                        var oreQty = parseInt($(this).closest("tr").find(".qty").text());
+                        if (oreQty > 1) {
+                            $(this).closest("tr").find(".qty").text((oreQty - 1).toString())
+                        }
+                    })
+                })
+                $(".incre").each(function () {
+                    $(this).click(function () {
+                        var oreQty = parseInt($(this).closest("tr").find(".qty").text());
+
+                        $(this).closest("tr").find(".qty").text((oreQty + 1).toString())
+
+                    })
+                })
+            })
+            $(".drinkbtn").click(function () {
+                console.log(111)
+                let haveItem = false;
+                var drinkSeleced = $(".drinkSelec").find("option:selected").text();
+                var drinkSelecedval = $(".drinkSelec").find("option:selected").val();
+                var drinkPrice = $(".drinkPrice").text();
+                $(".mealname").each(function () {
+                    if ($(this).text().trim() == drinkSeleced.trim()) {
+                        var oriqty = parseInt($(this).closest("tr").find(".qty").text());
+                        $(this).closest("tr").find(".qty").text((oriqty + 1).toString())
+                        haveItem = true;
+                    }
+                })
+                if (haveItem == false) {
+                    var drinkHtml = `<tr class="${drinkSelecedval}"><td class="mealname">${drinkSeleced}</td><td class="mealprice">${drinkPrice}</td><td  class="text-end">
+                    <button class="decre">-</button>
+                </td>
+                <td class="qty">
+                    1
+                </td>
+                <td>
+                    <button class="incre">+</button>
+                </td><td><button class="deleteDetail btn">刪除</button></td></tr>`;
+                    $("table").append(drinkHtml);
+                }
+                $(".deleteDetail").off("click");
+                $(".deleteDetail").each(function () {
+                    $(this).click(function () {
+                        $(this).closest("tr").remove();
+                    })
+                })
+                $(".incre").off("click");
+                $(".decre").off("click");
+                $(".decre").each(function () {
+                    $(this).click(function () {
+                        var oreQty = parseInt($(this).closest("tr").find(".qty").text());
+                        if (oreQty > 1) {
+                            $(this).closest("tr").find(".qty").text((oreQty - 1).toString())
+                        }
+                    })
+                })
+                $(".incre").each(function () {
+                    $(this).click(function () {
+                        var oreQty = parseInt($(this).closest("tr").find(".qty").text());
+
+                        $(this).closest("tr").find(".qty").text((oreQty + 1).toString())
+
+                    })
+                })
+            })
+            $(".winebtn").click(function () {
+                let haveItem = false;
+                var wineSeleced = $(".wineSelec").find("option:selected").text();
+                var wineSelecedval = $(".wineSelec").find("option:selected").val();
+                var winePrice = $(".winePrice").text();
+                $(".mealname").each(function () {
+                    if ($(this).text().trim() == wineSeleced.trim()) {
+                        var oriqty = parseInt($(this).closest("tr").find(".qty").text());
+                        $(this).closest("tr").find(".qty").text((oriqty + 1).toString())
+                        haveItem = true;
+                    }
+                })
+                if (haveItem == false) {
+                    console.log(wineSeleced)
+                    var wineHtml = `<tr class="${wineSelecedval}"><td class="mealname">${wineSeleced}</td><td class="mealprice">${winePrice}</td><td  class="text-end">
+                    <button class="decre">-</button>
+                </td>
+                <td class="qty">
+                    1
+                </td>
+                <td>
+                    <button class="incre">+</button>
+                </td><td><button class="deleteDetail btn">刪除</button></td></tr>`;
+        /**/
+                    $("table").append(wineHtml);
+                }
+                $(".deleteDetail").off("click");
+                $(".deleteDetail").each(function () {
+                    $(this).click(function () {
+                        $(this).closest("tr").remove();
+                    })
+                })
+                $(".incre").off("click");
+                $(".decre").off("click");
+                $(".decre").each(function () {
+                    $(this).click(function () {
+                        var oreQty = parseInt($(this).closest("tr").find(".qty").text());
+                        if (oreQty > 1) {
+                            $(this).closest("tr").find(".qty").text((oreQty - 1).toString())
+                        }
+                    })
+                })
+                $(".incre").each(function () {
+                    $(this).click(function () {
+                        var oreQty = parseInt($(this).closest("tr").find(".qty").text());
+
+                        $(this).closest("tr").find(".qty").text((oreQty + 1).toString())
+
+                    })
+                })
+            })
+            $(".deleteDetail").each(function ()
+            {
+                $(this).click(function () {
+                    $(this).closest("tr").remove();
+                })
+            })
+            $(".decre").each(function () {
+                $(this).click(function () {
+                    var oreQty = parseInt($(this).closest("tr").find(".qty").text());
+                    if (oreQty > 1) {
+                        $(this).closest("tr").find(".qty").text((oreQty - 1).toString())
+                    }
+                })
+            })
+            $(".incre").each(function () {
+                $(this).click(function () {
+                    var oreQty = parseInt($(this).closest("tr").find(".qty").text());
+
+                    $(this).closest("tr").find(".qty").text((oreQty + 1).toString())
+
+                })
+            })
+
+            $(".postbtn").click(function () {
+                var vm = {
+                    Id: @Model.Id, // 传入正确的 Id
+                    CartId:@Model.CartId,
+                    CartItemDetails: []
+                };
+                var people = $(".people").text();
+                var reservationtime = $(".reservationtime").text();
+                $(".mealname").each(function () {
+                    var mealid = parseInt($(this).closest("tr").attr("class"));
+                    var qty = parseInt($(this).closest("tr").find(".qty").text());
+                    vm.CartItemDetails.push({ MealId:mealid,Qty:qty})
+                })
+                fetch("/Cart/EditCartSecItem", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(vm)
+                })
+                    .then(data => {
+                        window.location.href = "/Cart/Cart?people=" + people + "&reservationVul=" + reservationtime +"#totalPrice";
+                    })
+                    .catch(error => {
+                        // 处理错误
+                        console.error("发生错误: ", error);
+                    });
+
+            })
+
+
+
+
+
+
+
+})
+
+
+
+    </script>
+
+
+
+}

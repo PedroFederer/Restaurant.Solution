@@ -1,0 +1,274 @@
+﻿@model Restaurant.Models.ViewModels.CartVm
+
+@{
+    ViewBag.Title = "Cart";
+}
+@{
+    var cantResDition = ViewBag.cantRes as Dictionary<int, List<int>>;
+    var cantRes2 = cantResDition[2] as List<int>;
+    var cantRes4 = cantResDition[4] as List<int>;
+}
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+@Styles.Render("~/Content/css")
+@Styles.Render("~/Content/cart.css")
+@Styles.Render("https://cdn.jsdelivr.net/npm/@sweetalert2/theme-dark@4/dark.css")
+@{ var total = 0;
+    <div class="container black">
+        <div class="row">
+            <div class="col-1"></div>
+            <h2 class="text-white col-xxl-3 col-md-4 title">會員資料</h2>
+            <div class="col-xxl-8 col-md-7"></div>
+
+            <div class="col-1"></div>
+            <div class="form-floating mb-3 col-11">
+                <input type="text" class="form-control name" id="floatingInput" value="@ViewBag.Member.Name" readonly>
+                <label for="floatingInput">姓名</label>
+            </div>
+            <div class="col-1"></div>
+            <div class="form-floating mb-3 col-11">
+                <input type="text" class="form-control" id="floatingInputPhone" value="@ViewBag.Member.PhoneNumber">
+                <label for="floatingInputPhone">手機</label>
+            </div>
+            <div class="col-1"></div>
+            <div class="form-floating mb-3 col-11">
+                <input type="email" class="form-control email" id="floatingInputEmail" value="@ViewBag.Member.Email" readonly>
+                <label for="floatingInputEmail">信箱</label>
+            </div>
+            @foreach (var item in cantRes2)
+            {
+                <div class="text-white cantRes2">
+                    @item
+                </div>
+            }
+            @foreach (var item in cantRes4)
+            {
+                <div class="text-white cantRes4">
+                    @item
+                </div>
+            }
+
+            <div class="col-12 line"></div>
+            <div class="col-1"></div>
+            <h2 class="text-white col-11 mt-3 mb-3">預約資料</h2>
+
+            <div class="col-1"></div>
+            <h3 class="text-white col-3 titlepeople">預約人數:</h3>
+            <select name="numOfPeople" id="numOfPeople" class="numOfPeople col-5">
+                <option value="1" @if (ViewBag.people == 1) { <text> selected</text> }>1</option>
+                <option value="2" @if (ViewBag.people == 2) { <text> selected</text> }>2</option>
+                <option value="3" @if (ViewBag.people == 3) { <text> selected</text> }>3</option>
+                <option value="4" @if (ViewBag.people == 4) { <text> selected</text> }>4</option>
+            </select>
+            <h3 class="col-3 text-white unit">人</h3>
+            <div class="space col-12"></div>
+
+            <div class="col-1"></div>
+            <h3 class="text-white col-3 titletime">預約時間:</h3>
+            @if (@ViewBag.reservationtime == null)
+            {
+                <h4 class="text-white col-4 mt-1 mb-3 timeblock">請選擇時間 </h4>
+            }
+            else
+            {
+                <h4 class="text-white col-4 mt-1 mb-3 timeblock">@ViewBag.reservationtime; </h4>
+
+            }
+            <button class="btn btnSelectRes col-4 text-white">選擇</button>
+            <div class="blockSelectRes row">
+                <h5 class="text-white mt-3">@ViewBag.resSelectUseArr[0] </h5>
+                <div class="col-4  d-flex  justify-content-center">
+                    <input type="radio" name="time" id="day1" class="rdo" value="1">
+                    <label for="day1" class="btnRadio">11:00-13:00</label>
+                </div>
+                <div class="col-4  d-flex  justify-content-center">
+                    <input type="radio" name="time" id="day2" class="rdo" value="2">
+                    <label for="day2" class="btnRadio">13:00-15:00</label>
+                </div>
+                <div class="col-4  d-flex  justify-content-center">
+                    <input type="radio" name="time" id="day3" class="rdo" value="3">
+                    <label for="day3" class="btnRadio">18:00-20:00</label>
+                </div>
+                <h5 class="text-white mt-3">@ViewBag.resSelectUseArr[1]</h5>
+                <div class="col-4  d-flex  justify-content-center">
+                    <input type="radio" name="time" id="day4" class="rdo" value="4">
+                    <label for="day4" class="btnRadio">11:00-13:00</label>
+                </div>
+                <div class="col-4  d-flex  justify-content-center">
+                    <input type="radio" name="time" id="day5" class="rdo" value="5">
+                    <label for="day5" class="btnRadio">13:00-15:00</label>
+                </div>
+                <div class="col-4  d-flex  justify-content-center">
+                    <input type="radio" name="time" id="day6" class="rdo" value="6">
+                    <label for="day6" class="btnRadio">18:00-20:00</label>
+                </div>
+                <h5 class="text-white mt-3">@ViewBag.resSelectUseArr[2]</h5>
+                <div class="col-4  d-flex  justify-content-center">
+                    <input type="radio" name="time" id="day7" class="rdo" value="7">
+                    <label for="day7" class="btnRadio">11:00-13:00</label>
+                </div>
+                <div class="col-4  d-flex  justify-content-center">
+                    <input type="radio" name="time" id="day8" class="rdo" value="8">
+                    <label for="day8" class="btnRadio">13:00-15:00</label>
+                </div>
+                <div class="col-4  d-flex  justify-content-center">
+                    <input type="radio" name="time" id="day9" class="rdo" value="9">
+                    <label for="day9" class="btnRadio">18:00-20:00</label>
+                </div>
+                <button class="timeSave">保存</button>
+            </div>
+            <div class="space col-12"></div>
+
+            <div class="col-12 line mb-4"></div>
+            <!-- 套餐選擇卡start -->
+            <div class="col-md-2"></div>
+            <div class="accordion col-md-8 mb-4" id="accordionCombo"></div>
+            <div class="col-md-2"></div>
+            <!-- 套餐選擇卡end -->
+            <div class="col-12 line mb-4"></div>
+            <div class="col-md-2"></div>
+            <div class="col-md-8 text-center secOrderTitle mb-1">
+                <p>-----美味加點-----</p>
+            </div>
+            <div class="col-md-2"></div>
+            <!-- 加點選擇卡start -->
+            <div class="col-md-2"></div>
+            <div class="accordion col-md-8 mb-4" id="accordionSingle"></div>
+            <div class="col-md-2"></div>
+            <!-- 加點選擇卡end-->
+            <div class="col-12 line mb-4"></div>
+
+
+            <div class="mealSelected row">
+                <div class=" col-md-2"></div>
+                <div class="mealSelectedTitle  col-md-8">
+                    <h2 class="text-center text-white">
+                        已點餐點
+                    </h2>
+                </div>
+                <div class=" col-md-2"></div>
+                <div class=" col-md-2"></div>
+                <div class=" mealSelectedContent col-md-8" id="mealSelectedContent">
+                    <!-- 這裡放加入訂單的餐點 -->
+                    @foreach (var cartItem in Model.CartItems)
+                    {
+                        var isSet = false;
+                        var suntotal = 0;
+                        if (cartItem != null)
+                        {
+                            foreach (var meal in ViewBag.mainMeals)
+                            {
+                                if (cartItem.CartItemDetails.FirstOrDefault().MealName == meal.Name)
+                                {
+                                    <div class="orderItemed orderItemedCombo mb-2 d-flex justify-content-between">
+                                        <div class="d-flex col-12">
+                                            <div class="mainMeal">@cartItem.CartItemDetails.FirstOrDefault().MealName<p class="ms-3">@cartItem.CartItemDetails.FirstOrDefault().Qty</p></div>
+                                            <ul class="orderItemedUl  ">
+                                                @for (var i = 1; i < cartItem.CartItemDetails.Count; i++)
+                                                {
+                                                    var cartItemDetails = cartItem.CartItemDetails.ToList();
+                                                    if (cartItemDetails[i] != null)
+                                                    {
+                                                        <li class="d-flex"><p>@cartItemDetails[i].MealName</p><p class="ms-3">@cartItemDetails[i].Qty</p></li>
+
+                                                    }
+                                                    suntotal = 0;
+                                                    foreach (var item in cartItemDetails)
+                                                    {
+                                                        suntotal += item.MealPrice * item.Qty;
+                                                    }
+
+                                                }
+
+                                            </ul>
+
+                                            <div class="submitTotal">@suntotal.ToString()</div>
+                                        </div>
+                                        <div class="d-flex justify-content-end col-12">
+                                            <button class="editOrderItem btn  text-end" id="@cartItem.Id">編輯</button>
+                                            <button class="deleteOrderItem btn  text-end" id="@cartItem.Id">刪除</button>
+                                        </div>
+                                    </div>
+                                    isSet = true;
+                                    break;
+                                }
+                            }
+                            if (isSet == false)
+                            {
+                                <div class="orderItemed orderItemedSingo mb-2 d-flex justify-content-between">
+                                    <div class="d-flex col-12">
+                                        <ul class="orderItemedUl  ">
+                                            <li class="text-white">加點</li>
+                                            @for (var i = 0; i < cartItem.CartItemDetails.Count; i++)
+                                            {
+                                                var cartItemDetails = cartItem.CartItemDetails.ToList();
+                                                if (cartItemDetails[i] != null)
+                                                {
+                                                    <li class="d-flex orderItemedSingoli">
+                                                        <p class="mealname">@cartItemDetails[i].MealName</p>
+                                                        <p class="ms-3 me-4 qty">@cartItemDetails[i].Qty</p>
+                                                    </li>
+
+                                                }
+                                                suntotal = 0;
+                                                foreach (var item in cartItemDetails)
+                                                {
+                                                    suntotal += item.MealPrice * item.Qty;
+                                                }
+
+                                            }
+
+                                        </ul>
+
+                                        <div class="submitTotal text-end">@suntotal.ToString()</div>
+                                    </div>
+                                    <div class="d-flex justify-content-end col-12">
+                                        <button class="editOrderItemIncre btn  text-end" id="@cartItem.Id">編輯</button>
+                                        <button class="deleteOrderItem btn  text-end" id="@cartItem.Id">刪除</button>
+                                    </div>
+                                </div>
+                            }
+
+
+                        }
+                        total += suntotal;
+
+                    }
+
+
+
+                    <!-- 這裡放加入訂單的餐點end -->
+                </div>
+                <div class=" col-md-2"></div>
+
+                <div class="row">
+                    <div class="col-8"></div>
+                    <div class="col-4 d-flex">
+                        <p class="text-white" id="totalPrice">總價:</p>
+                        <p class="totalPrice text-white ms-3">@total.ToString()</p>
+                    </div>
+                    <div class="col-4"></div>
+                    <input type="submit" value="送出預約" class="col-4 finishOrder">
+                    <div class="col-4"></div>
+                </div>
+
+
+            </div>
+        </div>
+        <div class="getPeople" style="display:none">@ViewBag.people</div>
+        <div class="getTime" style="display:none">@ViewBag.reservationVul</div>
+    </div>
+}
+
+@section scripts{
+
+    <script src="~/Scripts/cartUse.js"></script>
+
+
+    }
+
+
+
+
+
+

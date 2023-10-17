@@ -1,0 +1,95 @@
+﻿@model Restaurant.Models.ViewModels.CartItemVm
+@using Restaurant.Models.ViewModels;
+@{
+    ViewBag.Title = "套餐修改";
+}
+
+@Styles.Render("~/Content/css")
+@Styles.Render("~/Content/EditCartItem.css")
+
+<h2>套餐修改</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.HiddenFor(m => m.Id)
+    var nameArr = new string[] { "主餐", "開胃菜", "甜點", "飲品" };
+    var i = 0;
+
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+
+        @foreach (var item in Model.CartItemDetails)
+        {
+            @Html.HiddenFor(m => m.CartItemDetails[i].CartItemId)
+            var mealVms = ViewBag.dictionary[item.MealId] as List<MealVm>;
+            <div class="mb-3 d-flex justify-content-between row">
+                <h5 class="col-md-1 col-4">@nameArr[i]</h5>
+                <div class="col-md-4 col-8 text-end">
+                    @Html.DropDownListFor(m => m.CartItemDetails[i].MealName,
+                                           new SelectList(mealVms, "Name", "Name", item.MealName),
+                                           new { @class = "form-label mealDropDown" })
+                    @Html.ValidationMessageFor(x => item.MealName, "", new { @class = "text-danger" })
+                </div>
+                <h5 class="col-md-1 col-8">價格</h5>
+                <div class="col-md-3 col-4">
+                    <p class="price">@item.MealPrice</p>
+                </div>
+
+                <h5 class="col-md-1 col-8">數量</h5>
+                <div class="col-md-2 col-4">
+                    @Html.EditorFor(m => m.CartItemDetails[i].Qty, new { htmlAttributes = new { @class = "form-label qty text-end", @readonly = "readonly" } })
+                    @Html.ValidationMessageFor(x => item.Qty, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            i++;
+
+        }
+
+        <div class="mb-3">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="保存" class="btn btn-save me-3" />
+                @Html.ActionLink("回到點餐頁面", "Cart", null, new { @class = "btn btn-back" })
+            </div>
+        </div>
+    </div>
+}
+
+@Scripts.Render("~/bundles/jqueryval")
+@section Scripts {
+    <script>
+        // 使用 .each() 迭代所有 .mealDropDown 元素
+        $(".mealDropDown").each(function () {
+            $(this).change(function () {
+                var selectedValue = $(this).val();
+                $(this).find("option").removeAttr("selected");
+                $(this).find('option[value="' + selectedValue + '"]').attr("selected", "selected");
+                let mealname = $(this).find("option:selected").val();
+                // 发起一个 GET 请求到指定的 API 地址
+                fetch('/Api/CartApi/', {
+                    method: 'GET',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    }
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log(data)
+                        for (let category of data) {
+                            for (let meal of category.meals) {
+                                if (mealname.trim() == meal.name.trim()) {
+                                    $(this).closest(".d-flex").find(".price").text(meal.price);
+                                    break;
+                                }
+                            }
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Fetch error:', error);
+                    });
+            });
+        });
+    </script>
+}

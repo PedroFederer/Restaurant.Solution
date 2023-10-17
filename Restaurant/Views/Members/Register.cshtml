@@ -1,0 +1,73 @@
+﻿@model Restaurant.Models.ViewModels.RegisterVm
+
+@{
+    ViewBag.Title = "Register";
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="zh-tw">
+<head>
+    <link rel="stylesheet" href="~/Content/Register.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, user-scalable=1">
+    <title>註冊</title>
+</head>
+<body>
+    <section>
+        <div class="form-box">
+            <div class="form-value">
+
+                @using (Html.BeginForm())
+                {@Html.AntiForgeryToken()
+
+
+
+                <h2>註冊</h2>
+                <div class="inputbox">
+                    <ion-icon name="mail-outline"></ion-icon>
+                    @Html.EditorFor(model => model.Account, new { htmlAttributes = new { @type = "text", @placeholder = "帳號", @name = "account", @required = "" } })
+                    @Html.ValidationMessageFor(model => model.Account, "", new { @class = "text-danger" })
+
+                </div>
+                <div class="inputbox">
+                    <ion-icon name="lock-closed-outline"></ion-icon>
+                    @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @type = "password", @placeholder = "密碼", @name = "password", @required = "" } })
+                    @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="inputbox">
+                    <ion-icon name="checkmark-done-outline"></ion-icon>
+                    @Html.EditorFor(model => model.ConfirmPassword, new { htmlAttributes = new { @type = "password", @name = "confirmpassword", @placeholder = "確認密碼", @required = "" } })
+                    @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "text-danger" })
+                </div>
+                <div class="inputbox">
+                    <ion-icon name="person-circle-outline"></ion-icon>
+                    @Html.EditorFor(model => model.Name, new
+               {
+                   htmlAttributes = new { @type = "text", @name = "Name", @placeholder = "姓名", @required = "" }
+               })
+                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                </div>
+                <div class="inputbox">
+                    <ion-icon name="call-outline"></ion-icon>
+                    @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @type = "text", @name = "PhoneNumber", @placeholder = "手機", @required = "" } })
+                    @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
+                </div>
+                <div class="inputbox">
+                    <ion-icon name="mail-outline"></ion-icon>
+                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @type = "email", @name = "Email", @placeholder = "信箱", @required = "" } })
+                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                </div>
+
+
+                <button type="submit" class="button">
+                    註冊
+                </button>
+            }
+            </div>
+
+        </div>
+    </section>
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+</body>
+</html>

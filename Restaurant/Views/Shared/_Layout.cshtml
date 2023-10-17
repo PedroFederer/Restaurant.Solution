@@ -1,0 +1,96 @@
+﻿@{
+    bool hasOrder = false;
+    if (User.Identity.IsAuthenticated)
+    {
+        hasOrder = new Restaurant.Repositories.CartRepository().HasOrder(User.Identity.Name);
+    }
+
+}
+
+
+<!DOCTYPE html>
+<html lang="zh-tw">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verum</title>
+
+    @Styles.Render("~/Content/css")
+    @Styles.Render("~/Content/Layout.css")
+    @RenderSection("css", required: false)
+
+    @*@Scripts.Render("~/bundles/modernizr")
+        @RenderSection("css", required: false)*@
+    <style>
+        body{
+            margin-top:80px;
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.html">
+                <a href="/Home/Index"> <img src="~/MyRestaurantImg/LOGO.png" width="30" height="30" class="d-inline-block align-top" alt=""></a>
+                @*<span class="h3">Verum</span>*@
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link text-white " aria-current="page" href="/Home/Index">餐廳簡介</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white " href="/Meals/Index">菜單</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white " href="/Home/Reservation">預約</a>
+                    </li>
+                </ul>
+
+                <div class="memberNav">
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <a href="/Members/Index/" class="text-white">
+                            <div style="display:inline-block" Id="userName">( @User.Identity.Name )</div>
+                        </a>
+                            if (hasOrder == true)
+                            {
+                                <a href="/Cart/ConfirmCheckout/"><div class="lookorder ms-3" style="display:inline-block">查看訂單</div></a>
+                            }
+                        <a href="/Members/Logout/" class="text-white ms-3" style="display:inline-block">登出</a>
+                        @*<a href="/ShoppingCart/index/" class="text-white" id="cartIcon">購物車( @( new CartsiRepotory().GetCart().Items.Sum(x=>x.Qty) ) )</a>*@
+                    }
+                    else
+                    {
+                        <a href="/Members/Register" class="text-white">註冊會員</a>
+                        <a href="/Members/Login/" class="text-white ms-3">登入</a>
+                    }
+
+
+                </div>
+            </div>
+        </div>
+    </nav>
+
+
+    <div class="conter body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Verum All rights reserved.</p>
+        </footer>
+    </div>
+
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
+
+

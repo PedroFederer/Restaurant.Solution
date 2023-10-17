@@ -1,0 +1,30 @@
+﻿*{
+    color:#fff;
+}
+.qty{
+    width:50px;
+    text-align:center;
+}
+select,option{
+    color:#000;
+}
+body {
+}
+.btn {
+    background: linear-gradient(#e99e61, #6B4423);
+    color:#fff;
+}
+.people, .reservationtime{
+    display:none;
+}
+.incre, .decre {
+    color: #000;
+    width:50px;
+    background-color: #e99e61;
+    font-size:18px;
+    border-radius:5px;
+ 
+}
+.decre{
+  
+}
